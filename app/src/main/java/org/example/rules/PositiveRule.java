@@ -2,13 +2,13 @@ package org.example.rules;
 
 public class PositiveRule implements ValidationRules {
 
-    private final int IS_POSITIVE;
+    private final int isPositive;
 
     public PositiveRule() {
-        this.IS_POSITIVE = 0;
+        this.isPositive = 0;
     }
     public boolean isValid(Integer value) {
-        return value != null && value >= IS_POSITIVE;
+        return value != null && value >= isPositive;
     }
     @Override
     public boolean isValid(String value) {

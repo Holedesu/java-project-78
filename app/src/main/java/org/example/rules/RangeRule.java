@@ -2,15 +2,15 @@ package org.example.rules;
 
 public class RangeRule implements ValidationRules {
 
-    private final int MIN_RANGE;
-    private final int MAX_RANGE;
+    private final int minRange;
+    private final int maxRange;
 
     public RangeRule(int min, int max) {
-        this.MIN_RANGE = min;
-        this.MAX_RANGE = max;
+        this.minRange = min;
+        this.maxRange = max;
     }
     public boolean isValid(Integer value) {
-        return value != null && (value >= MIN_RANGE && value <= MAX_RANGE);
+        return value != null && (value >= minRange && value <= maxRange);
     }
 
     @Override

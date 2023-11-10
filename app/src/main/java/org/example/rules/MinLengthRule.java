@@ -8,8 +8,12 @@ public class MinLengthRule implements ValidationRules {
     }
 
     @Override
-    public boolean isValid(String value) {return value != null && value.length() >= minLength;}
+    public boolean isValid(String value) {
+        return value != null && value.length() >= minLength;
+    }
 
     @Override
-    public boolean isValid(Integer value) {return false;}
+    public boolean isValid(Integer value) {
+        return false;
+    }
 }

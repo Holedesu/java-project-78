@@ -4,5 +4,7 @@ public class BaseSchema implements ValidationRules {
     public boolean isValid(String value) {
         return value != null && !value.isEmpty();
     }
-    public boolean isValid(Integer value) {return value != null;}
+    public boolean isValid(Integer value) {
+        return value != null;
+    }
 }
