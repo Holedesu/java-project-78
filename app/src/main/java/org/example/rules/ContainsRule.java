@@ -1,5 +1,7 @@
 package org.example.rules;
 
+import java.util.Map;
+
 public class ContainsRule implements ValidationRules {
     private String substring;
 
@@ -14,6 +16,11 @@ public class ContainsRule implements ValidationRules {
 
     @Override
     public boolean isValid(Integer value) {
+        return false;
+    }
+
+    @Override
+    public boolean isValid(Map<?, ?> value) {
         return false;
     }
 }

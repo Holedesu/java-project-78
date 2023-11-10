@@ -1,5 +1,7 @@
 package org.example.rules;
 
+import java.util.Map;
+
 public class PositiveRule implements ValidationRules {
 
     private final int isPositive;
@@ -12,6 +14,11 @@ public class PositiveRule implements ValidationRules {
     }
     @Override
     public boolean isValid(String value) {
+        return false;
+    }
+
+    @Override
+    public boolean isValid(Map<?, ?> value) {
         return false;
     }
 }

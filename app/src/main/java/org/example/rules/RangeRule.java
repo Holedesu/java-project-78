@@ -1,5 +1,7 @@
 package org.example.rules;
 
+import java.util.Map;
+
 public class RangeRule implements ValidationRules {
 
     private final int minRange;
@@ -16,5 +18,10 @@ public class RangeRule implements ValidationRules {
     @Override
     public boolean isValid(String value) {
         return value != null;
+    }
+
+    @Override
+    public boolean isValid(Map<?, ?> value) {
+        return false;
     }
 }
