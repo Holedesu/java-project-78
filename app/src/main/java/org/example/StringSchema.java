@@ -2,7 +2,7 @@ package org.example;
 
 import org.example.rules.ContainsRule;
 import org.example.rules.MinLengthRule;
-import org.example.rules.RequiredRules;
+import org.example.rules.BaseSchema;
 import org.example.rules.ValidationRules;
 
 
@@ -18,7 +18,7 @@ public class StringSchema {
     }
 
     public StringSchema required() {
-        rules.add(new RequiredRules());
+        rules.add(new BaseSchema());
         return this;
     }
 

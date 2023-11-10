@@ -11,4 +11,9 @@ public class ContainsRule implements ValidationRules {
     public boolean isValid(String value) {
         return value != null && value.contains(substring);
     }
+
+    @Override
+    public boolean isValid(Integer value) {
+        return false;
+    }
 }

@@ -1,7 +1,8 @@
 package org.example.rules;
-public class RequiredRules implements ValidationRules {
+public class BaseSchema implements ValidationRules {
     @Override
     public boolean isValid(String value) {
         return value != null && !value.isEmpty();
     }
+    public boolean isValid(Integer value) {return value != null;}
 }
