@@ -1,8 +1,8 @@
 import hexlet.code.Validator;
 import hexlet.code.BaseSchema;
-import hexlet.code.StringSchema;
-import hexlet.code.NumberSchema;
-import hexlet.code.MapSchema;
+import hexlet.code.schemas.StringSchema;
+import hexlet.code.schemas.NumberSchema;
+import hexlet.code.schemas.MapSchema;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
