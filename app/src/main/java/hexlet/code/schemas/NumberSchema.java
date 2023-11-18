@@ -33,7 +33,7 @@ public class NumberSchema extends BaseSchema<Integer> {
             return false;
         }
 
-        if (positive && ((Integer) value) < 0) {
+        if (positive && ((Integer) value) <= 0) {
             return false;
         }
 

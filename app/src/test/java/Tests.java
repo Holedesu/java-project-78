@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public final class Tests {
 
@@ -47,22 +49,26 @@ public final class Tests {
         Validator v = new Validator();
         NumberSchema schema = v.number();
 
-        assertThat(schema.isValid(5)).isTrue();
-        assertThat(schema.isValid(null)).isTrue();
-        assertThat(schema.isValid(-5)).isTrue();
+        assertTrue(schema.isValid(null));
+        assertTrue(schema.positive().isValid(null));
 
         schema.required();
-        assertThat(schema.isValid(null)).isFalse();
 
-        schema.positive();
-        assertThat(schema.isValid(-5)).isFalse();
-        schema.positive();
-        assertThat(schema.isValid(0)).isTrue();
-        assertThat(schema.isValid(5)).isTrue();
+        assertFalse(schema.isValid(null));
+        assertFalse(schema.isValid("5"));
+        assertTrue(schema.isValid(10));
+
+        // Потому что ранее мы вызвали метод positive()
+        assertFalse(schema.isValid(-10));
+        //  Ноль — не положительное число
+        assertFalse(schema.isValid(0));
 
         schema.range(5, 10);
-        assertThat(schema.isValid(5)).isTrue();
-        assertThat(schema.isValid(15)).isFalse();
+
+        assertTrue(schema.isValid(5));
+        assertTrue(schema.isValid(10));
+        assertFalse(schema.isValid(4));
+        assertFalse(schema.isValid(11));
     }
     @Test
     public void testIntegerChain() {
