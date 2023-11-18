@@ -1,7 +1,7 @@
 package hexlet.code.schemas;
 
-public class NumberSchema extends BaseSchema<Integer> {
-    protected boolean required = false;
+public final class NumberSchema extends BaseSchema<Integer> {
+    private boolean required = false;
     private boolean positive = false;
     private Integer min;
     private Integer max;

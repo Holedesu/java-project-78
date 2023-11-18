@@ -3,8 +3,8 @@ package hexlet.code.schemas;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapSchema extends BaseSchema<Map<String, ?>> {
-    protected boolean required = false;
+public final class MapSchema extends BaseSchema<Map<String, ?>> {
+    private boolean required = false;
     private Integer size;
     private Map<String, BaseSchema> shapeSchemas;
 

@@ -1,9 +1,9 @@
 package hexlet.code.schemas;
 
 
-public class StringSchema extends BaseSchema<String> {
+public final class StringSchema extends BaseSchema<String> {
 
-    protected boolean required = false;
+    private boolean required = false;
     private Integer minLength;
     private String contains;
 
