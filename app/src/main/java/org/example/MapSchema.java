@@ -1,40 +1,53 @@
 package org.example;
 
-
-import org.example.rules.BaseSchema;
-
-import org.example.rules.SizeOfRule;
-import org.example.rules.ValidationRules;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
-public class MapSchema {
-    private final List<ValidationRules> rules;
-    public MapSchema() {
-        rules = new ArrayList<>();
+public class MapSchema extends BaseSchema<Map<String, ?>> {
+    protected boolean required = false;
+    private Integer size;
+    private Map<String, BaseSchema> shapeSchemas;
+
+    public MapSchema shape(Map<String, BaseSchema> schemas) {
+        this.shapeSchemas = schemas;
+        return this;
     }
 
     public MapSchema required() {
-        rules.add(new BaseSchema());
+        required = true;
         return this;
     }
 
-    public MapSchema sizeof(int size) {
-        rules.add(new SizeOfRule(size));
+    public MapSchema sizeof(int sizeValue) {
+        this.size = sizeValue;
         return this;
+
     }
+    @Override
+    public boolean isValid(Object value) {
+        if (value == null && !required) {
+            return true;
+        }
 
+        if (value == null || !(value instanceof Map)) {
+            return false;
+        }
 
+        if (size != null && ((HashMap) value).size() != size) {
+            return false;
+        }
 
-    public boolean isValid(Map<?, ?> value) {
-        for (ValidationRules rule : rules) {
-            if (!rule.isValid(value)) {
-                return false;
+        if (shapeSchemas != null) {
+            for (Map.Entry<String, BaseSchema> entry : shapeSchemas.entrySet()) {
+                String key = entry.getKey();
+                BaseSchema schema = entry.getValue();
+
+                if (!((Map<String, ?>) value).containsKey(key) || !schema.isValid(((Map<?, ?>) value).get(key))) {
+                    return false;
+                }
             }
         }
+
         return true;
     }
 }
-

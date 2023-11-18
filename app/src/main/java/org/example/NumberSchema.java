@@ -1,41 +1,49 @@
 package org.example;
+public class NumberSchema extends BaseSchema<Integer> {
+    protected boolean required = false;
+    private boolean positive = false;
+    private Integer min;
+    private Integer max;
 
-
-import org.example.rules.BaseSchema;
-import org.example.rules.PositiveRule;
-import org.example.rules.RangeRule;
-import org.example.rules.ValidationRules;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class NumberSchema {
-    private final List<ValidationRules> rules;
-    public NumberSchema() {
-        rules = new ArrayList<>();
-    }
 
     public NumberSchema required() {
-        rules.add(new BaseSchema());
+        required = true;
         return this;
     }
 
     public NumberSchema positive() {
-        rules.add(new PositiveRule());
+        positive = true;
         return this;
     }
 
-    public NumberSchema range(int rangeMin, int rangeMax) {
-        rules.add(new RangeRule(rangeMin, rangeMax));
+    public NumberSchema range(int minValue, int maxValue) {
+        this.min = minValue;
+        this.max = maxValue;
         return this;
     }
 
-    public boolean isValid(Integer value) {
-        for (ValidationRules rule : rules) {
-            if (!rule.isValid(value)) {
-                return false;
-            }
+    @Override
+    public boolean isValid(Object value) {
+        if (value == null && !required) {
+            return true;
         }
+
+        if (value == null || !(value instanceof Integer)) {
+            return false;
+        }
+
+        if (positive && ((Integer) value) < 0) {
+            return false;
+        }
+
+        if ((min) != null && ((Integer) value) < min) {
+            return false;
+        }
+
+        if ((max) != null  && ((Integer) value) > max) {
+            return false;
+        }
+
         return true;
     }
 }

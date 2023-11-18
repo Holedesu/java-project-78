@@ -1,48 +1,49 @@
 package org.example;
 
-import org.example.rules.ContainsRule;
-import org.example.rules.MinLengthRule;
-import org.example.rules.BaseSchema;
-import org.example.rules.ValidationRules;
 
+public class StringSchema extends BaseSchema<String> {
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class StringSchema {
-    public final List<ValidationRules> rules;
-
-    public StringSchema() {
-        rules = new ArrayList<>();
-    }
+    protected boolean required = false;
+    private Integer minLength;
+    private String contains;
 
     public StringSchema required() {
-        rules.add(new BaseSchema());
+        required = true;
         return this;
     }
 
-    public StringSchema minLength(int minLength) {
-        rules.add(new MinLengthRule(minLength));
+    public StringSchema minLength(int minLengthValue) {
+        this.minLength = minLengthValue;
         return this;
     }
 
-    public StringSchema contains(String substring) {
-        rules.add(new ContainsRule(substring));
+    public StringSchema contains(String subString) {
+        this.contains = subString;
         return this;
     }
 
-    public boolean isValid(String value) {
-        for (ValidationRules rule : rules) {
-            if (!rule.isValid(value)) {
-                return false;
-            }
+    @Override
+    public boolean isValid(Object value) {
+        if (value == null && !required) {
+            return true;
         }
+
+        if (value == null || !(value instanceof String)) {
+            return false;
+        }
+
+        if (required && ((String) value).isEmpty()) {
+            return false;
+        }
+
+        if (minLength != null && ((String) value).length() < minLength) {
+            return false;
+        }
+
+        if (contains != null && !((String) value).contains(contains)) {
+            return false;
+        }
+
         return true;
     }
-
-    public boolean isValid(int value) {
-        return false;
-    }
-
 }

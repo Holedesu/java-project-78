@@ -1,8 +1,6 @@
 package org.example;
 
 public class Validator {
-    String string;
-    int number;
 
     public StringSchema string() {
         return new StringSchema();
