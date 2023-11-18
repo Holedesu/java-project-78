@@ -1,8 +1,6 @@
 package hexlet.code.schemas;
 
 
-import hexlet.code.BaseSchema;
-
 public class StringSchema extends BaseSchema<String> {
 
     protected boolean required = false;
