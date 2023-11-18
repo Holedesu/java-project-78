@@ -1,4 +1,4 @@
-package hexlet.code.schemas;
+package hexlet.code;
 
 public abstract class BaseSchema<T> {
 

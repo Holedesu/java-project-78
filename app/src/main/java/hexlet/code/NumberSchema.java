@@ -1,4 +1,4 @@
-package hexlet.code.schemas;
+package hexlet.code;
 public class NumberSchema extends BaseSchema<Integer> {
     protected boolean required = false;
     private boolean positive = false;
